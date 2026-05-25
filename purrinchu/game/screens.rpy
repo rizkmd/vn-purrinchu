@@ -175,7 +175,6 @@ screen input(prompt):
     style_prefix "input"
 
     window:
-
         vbox:
             xanchor gui.dialogue_text_xalign
             xpos gui.dialogue_xpos

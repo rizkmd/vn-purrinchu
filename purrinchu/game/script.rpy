@@ -2,6 +2,7 @@
 define k = Character("Raja Barat")
 define a = Character("Akung")
 define x = Character("Xiao Ming Ling")
+define pov = Character("[povname]")
 
 label start:
     
@@ -160,13 +161,14 @@ label start:
     show x nervous_embarrassed_laugh
 
     x "Sebenarnya, telur naga tidak dijaga seperti yang kamu bayangkan."
-    x "Kami hanya memastikan lingkungan sekitar cocok untuk penetasan telur."
-    x "Setiap hari"
+    x "Kami tidak menjaga dengan pasukan bersenjata atau semacamnya."
+    x "Tapi kami menjaga suhu, kelembaban, dan kondisi lainnya agar telur itu bisa menetas dengan baik."
+    x "Lagi pula, jika orang luar mencurinya, mereka tidak akan bisa melakukan apa-apa dengan telur itu."
 
     hide x nervous_embarrassed_laugh
     show k neutral
 
-    k "Oh... Maaf."
+    k "Oh... Tidak kusangka akan semudah ini."
 
     hide k neutral
     show x neutral_talk
@@ -200,6 +202,122 @@ label start:
     k "Gadis yang baik, namun bodoh."
     k "Sekarang aku akan menjadi penguasa dunia yang tak terkalahkan!"
     k "Mari kita pulang ke barat."
+
+    scene bg dprd
+    show a neutral
+
+    a "Selamat pagi, dunia."
+
+    hide a neutral
+    show a surprised
+
+    a "KEMANA TELUR NAGA ITU?!"
+
+    hide a surprised
+    show a worried
+
+    a "Uhuk... Uhuk..."
+    
+    hide a worried
+    show p worried_talk
+
+    p "Akung, ada apa?"
+    p "Pagi-pagi begini sudah teriak-teriak."
+
+    hide p worried_talk
+    show a angry
+
+    a "TELUR NAGA HILANG!!!"
+
+    hide a angry
+    show p disbelief
+
+    p "Nani the fuck?!"
+
+    hide p disbelief
+    show x scared_talk
+
+    x "Akung, Purin, maaf..."
+
+    hide x scared_talk
+    show a angry
+
+    a "XIAO MING LING"
+    a "APA YANG TERJADI?"
+    a "DAN KENAPA TUBUHMU PENUH LUKA?"
+
+    hide a angry
+
+    "Xiao Ming Ling menceritakan apa yang terjadi."
+
+    show a worried
+
+    a "Aku tidak tahu harus berkata apa..."
+    a "Raja Barat mencuri telur naga!"
+    a "Apa yang dia pikirkan?!"
+
+    show a sad
+
+    a "Uhuk... Uhuk..."
+    a "Purrin, aku sudah terlalu tua untuk menghadapi ini."
+    a "Kamu harus merebut telur itu kembali."
+    a "Pergilah bersama Xiao Ming Ling."
+    a "Sebelum kalian pergi, berikan beberapa pertanyaan kepada para Dragon Sage muda."
+    a "Lalu ajak satu orang dengan pengetahuan di atas rata-rata untuk menemani kalian."
+
+    hide a sad
+    show p frown
+
+    p "Baik, Akung. Aku akan melakukan yang terbaik."
+    p "Ayo Ming, kita temui para Dragon Sage muda itu satu per satu."
+    p "Selamat tinggal, Akung."
+
+    hide p frown
+    show a sad
+
+    a "Selamat jalan, semoga kalian berhasil."
+
+    scene bg village
+    show p sad_talk
+
+    p "Ming, kita telah menanyai para Dragon Sage muda, tapi tidak ada yang bisa menjawab semua pertanyaanku."
+    
+    hide p sad_talk
+    show x neutral_talk
+
+    x "Kita tidak boleh menyerah, Purrin."
+    x "Masih ada satu orang yang belum kita temui."
+    x "Itu, yang diam sendirian di pojokan!"
+
+    hide x neutral_talk
+    show p neutral_talk
+
+    p "Hey, kamu yang di pojokan!"
+    p "Siapa namamu?"
+
+    $ povname = renpy.input("Siapa namamu?: ")
+    hide p neutral_talk
+
+    pov "Namaku [povname]"
+
+    show p neutral_talk
+    p "Salam kenal, [povname]. Aku Purrin, dan ini Ming."
+
+    hide p neutral_talk
+    show x neutral_talk
+
+    x "Halo, [povname]. Aku Xiao Ming Ling."
+
+    hide x neutral_talk
+    show p neutral_talk
+
+    p "[povname], seperti yang sudah kamu ketahui, telur naga telah dicuri oleh Raja Barat."
+    p "Aku dan Ming sedang mencari seseorang yang bisa membantu kami merebut kembali telur itu."
+    p "Jika kamu berhasil menjawab semua pertanyaanku, berarti kamu layak untuk ikut dalam misi ini."
+    p "Apakah kamu siap untuk menjawab pertanyaanku?"
+
+
+
 
     
 
