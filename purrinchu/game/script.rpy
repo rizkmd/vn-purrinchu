@@ -316,11 +316,20 @@ label start:
     p "Jika kamu berhasil menjawab semua pertanyaanku, berarti kamu layak untuk ikut dalam misi ini."
     p "Apakah kamu siap untuk menjawab pertanyaanku?"
 
+    menu:
+        "Siap":
+            pass
+        "Tidak siap":
+            hide p neutral_talk
+            "Kamu menolak untuk menjawab pertanyaan Purrin."
+            "Purrin dan Xiao Ming Ling pergi meninggalkanmu di pojokan."
+            "2 hari kemudian, kamu mendapat kabar bahwa mereka tewas dalam perjalanan merebut kembali telur naga."
+            "Telur naga tetap hilang, dan bumi kehilangan penjaganya."
+            "Peradaban manusia akan punah dalam 10 tahun ke depan."
+            "Game Over"
+            return
 
-
-
-    
-
+    p "Baiklah, aku akan mulai dengan pertanyaan pertama."
     # This ends the game.
 
     return
