@@ -4,8 +4,12 @@ define a = Character("Akung")
 define x = Character("Xiao Ming Ling")
 define pov = Character("[povname]")
 
+default current_question_idx = 0
+default score = 0
+default player_response = ""
+
 label start:
-    
+
     scene bg anime grassland 185
 
     "Sejak awal terciptanya dunia, manusia hidup berdampingan dengan makhluk-makhluk rakus dari planet lain yang datang melintasi angkasa."
@@ -329,7 +333,75 @@ label start:
             "Game Over"
             return
 
-    p "Baiklah, aku akan mulai dengan pertanyaan pertama."
-    # This ends the game.
+        p "Baiklah, aku akan mulai dengan pertanyaan pertama."
+
+    call make_question_list from _call_make_question_list   # build the list
+    $ current_question_idx = 0                              # reset counter
+    $ score = 0
+    jump begin_quiz                                         # start the quiz
+
+
+label begin_quiz:
+
+    if current_question_idx >= len(question_list):
+        jump quiz_finished
+
+    $ current_question = question_list[current_question_idx]
+    $ adjusted_idx = current_question_idx + 1
+
+    p "Pertanyaan [adjusted_idx]: [current_question.question]"
+
+    menu:
+        "[current_question.a1]":
+            $ player_response = current_question.a1
+            #call check_answer from _call_check_answer
+
+        "[current_question.a2]":
+            $ player_response = current_question.a2
+            #call check_answer from _call_check_answer_1
+
+        "[current_question.a3]":
+            $ player_response = current_question.a3
+            #call check_answer from _call_check_answer_2
+
+        "[current_question.a4]":
+            $ player_response = current_question.a4
+            #call check_answer from _call_check_answer_3
+
+#label check_answer:
+
+    if player_response == current_question.correct:
+        p "Hmm..."
+        $ score += current_question.point_value
+    else:
+        p "Hmm..."
+
+    $ current_question_idx += 1
+    jump begin_quiz
+
+
+label quiz_finished:
+
+    p "Kamu menjawab semua pertanyaan dengan skor [score] dari [len(question_list)]."
+
+    if score >= 8:   # all correct
+        p "Luar biasa! Kamu layak ikut dalam misi ini."
+        jump continue_game
+    else:
+        p "Hmm... Kamu masih perlu banyak belajar."
+        hide p neutral_talk
+        "Purrin dan Xiao Ming Ling pergi meninggalkanmu di pojokan."
+        "2 hari kemudian, kamu mendapat kabar bahwa mereka tewas dalam perjalanan merebut kembali telur naga."
+        "Telur naga tetap hilang, dan bumi kehilangan penjaganya."
+        "Peradaban manusia akan punah dalam 10 tahun ke depan."
+        "Game Over"
+        return
+
+label continue_game:
+    p "Baiklah, kita akan segera memulai perjalanan ini."
+
+    scene bg anime grassland 9
+    show p neutral_talk
+    p "Kamu, aku, dan Ming akan pergi ke barat untuk merebut kembali telur naga itu."
 
     return
