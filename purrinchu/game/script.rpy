@@ -401,7 +401,11 @@ label continue_game:
     p "Baiklah, kita akan segera memulai perjalanan ini."
 
     scene bg anime grassland 9
-    show p neutral_talk
-    p "Kamu, aku, dan Ming akan pergi ke barat untuk merebut kembali telur naga itu."
+    
+    "Purrin, Xiao Ming Ling, dan [povname] melakukan perjalanan selama beberapa hari."
+    "Perjalanan berlangsung cukup tenang."
+    "Mereka melewati padang rumput luas dan beberapa desa kecil."
+
+    
 
     return
