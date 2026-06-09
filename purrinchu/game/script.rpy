@@ -3,6 +3,10 @@ define k = Character("Raja Barat")
 define a = Character("Akung")
 define x = Character("Xiao Ming Ling")
 define pov = Character("[povname]")
+define o1 = Character("???")
+define o2 = Character("Bukan Akung")
+define g = Character("???")
+define t = Character("Tono")
 
 default current_question_idx = 0
 default score = 0
@@ -385,6 +389,8 @@ label quiz_finished:
     p "Kamu menjawab semua pertanyaan dengan skor [score] dari [len(question_list)]."
 
     if score >= 8:   # all correct
+        hide p neutral_talk
+        show p happy_talk
         p "Luar biasa! Kamu layak ikut dalam misi ini."
         jump continue_game
     else:
@@ -406,6 +412,396 @@ label continue_game:
     "Perjalanan berlangsung cukup tenang."
     "Mereka melewati padang rumput luas dan beberapa desa kecil."
 
+    scene bg anime grassland 10
+
+    "Saat matahari mulai terbenam, dari kejauhan terlihat sebuah desa yang ramai."
+    "Lampion tergantung di sepanjang jalan, dan suara musik serta tawa terdengar dari dalam desa."
+
+    show p happy_talk
+
+    p "Wow, sepertinya ada festival di desa itu!"
+    p "Ayo kita lihat!"
+
+    menu:
+        "Ayo!":
+            pass
+        "Tidak, kita harus fokus berjalan ke barat!":
+            jump continue_game_no_festival
+
+    p "Kita sudah berjalan jauh, kita pantas mendapatkan sedikit hiburan!"
+
+    scene bg festival
+    show p happy_talk
+    p "Ini luar biasa! Aku senang kita memutuskan untuk mampir!"
+
+    hide p happy_talk
+    show x nervous_embarrassed_laugh
+
+    x "Lihat, ada banyak makanan enak di sini!"
+
+    hide x nervous_embarrassed_laugh
+    show p happy_talk
+
+    p "Dan lihat, ada pertunjukan musik dan tarian yang keren!"
+
+    hide p happy_talk
+    show x nervous_embarrassed_laugh
+
+    x "Ada permainan juga, ayo kita coba!"
+
+    scene bg festival_game
+
+    "Purrin, Xiao Ming Ling, dan [povname] menikmati berbagai kegiatan di festival itu."
+    "Mereka bermain permainan, menonton pertunjukan, dan mencicipi makanan lezat."
+
+    show p happy_talk
+
+    p "Ah, aku sudah kenyang dan mulai lelah."
+    p "Tapi sebelum kita lanjut, aku ingin [povname] untuk membuktikan sekali lagi bahwa kamu layak ikut dalam misi ini."
+    p "Aku ingin kamu memainkan salah satu permainan di festival ini dan menang."
+
+    hide p happy_talk
+
+    pov "Kalo cuma permainan festival mah gampang, aku pasti menang!"
+
+label card_game_gate:
+    $ card_game = CardMatchGame(pairs=6)
+    call screen card_match_game(card_game)
+
+    if _return:
+        show p happy_talk
+        p "Wah, hebat! Kamu berhasil mencocokkan semua kartu!"
+        p "Memori yang tajam seperti ini akan sangat berguna dalam misi kita."
+        pass
+    else:
+        show p neutral_talk
+        p "Hmm, kamu menyerah? Ayo coba lagi, pasti bisa!"
+        hide p neutral_talk
+        jump card_game_gate
+
+p "Baiklah, kita sudah cukup bersenang-senang di festival ini."
+p "Saatnya istirahat."
+p "Kita lanjutkan perjalanan ke barat besok pagi."
+
+hide p happy_talk
+show o
+
+o1 "Jarang sekali melihat petualang menuju barat akhir-akhir ini."
+
+hide o
+show p surprised_talk
+
+p "Eh... Bukankah ini mY?!"
+
+hide p surprised_talk
+show o
+
+o1 "My my apa maksudmu anak muda?"
+
+hide o
+show p surprised_talk
+
+p "My Akung?"
+
+hide p surprised_talk
+show o
+
+o1 "Siapa Akung? Aku bukan Akung!"
+
+hide o
+show p happy_talk
+
+p "Akung lucu sekali, pakai kacamata hitam dan dasi kupu-kupu."
+
+hide p happy_talk
+show o
+
+o1 "Aku bukan Akung!"
+
+hide o
+show p neutral_talk
+
+p "Lalu kamu siapa?"
+
+hide p neutral_talk
+show o
+
+o1 "Tidak penting siapa aku, yang penting aku bukan Akung!"
+
+hide o
+show p neutral_talk
+
+p "Baiklah, bukan Akung."
+p "Kenapa tidak ada petualang yang menuju ke barat akhir-akhir ini?"
+
+hide p neutral_talk
+show o
+
+o2 "Banyak berita buruk."
+o2 "Para pedagang yang pergi ke barat tidak ada yang kembali."
+o2 "Padahal, biasanya mereka pulang paling lama 3 hari."
+o2 "Kami mencoba untuk mencari mereka di hutan, tapi tidak menemukan apa-apa."
+
+hide o
+show x neutral_talk
+
+x "Apakah itu ulah monster hutan?"
+
+hide x neutral_talk
+show o
+
+o2 "Monster biasanya meninggalkan jejak."
+o2 "Yang ini tidak."
+o2 "Lagipula, puluhan tahun aku hidup, tidak pernah ada monster di hutan itu."
+o2 "Aku rasa ada sesuatu yang salah di barat."
+
+hide o
+show x neutral_talk
+
+x "Purrin... Aku takut."
+
+hide x neutral_talk
+show p frown
+
+p "Tidak apa-apa, Ming."
+p "Kita akan menghadapi apapun yang ada di barat bersama-sama."
+p "Terima kasih atas informasinya, Bukan Akung."
+
+hide p frown
+show o
+
+o2 "Berhati-hatilah, anak muda."
+o2 "Oyasumi."
+
+scene bg sky_night
+
+"Purrin, Xiao Ming Ling, dan [povname] mendirikan tenda dan segera berbaring tanpa berkata sepatah kata pun."
+
+show x neutral_talk
+
+x "{i}(Aku sangat takut...){/i}"
+x "{i}(Ini semua salahku){/i}"
+x "{i}(Aku yang membuat Raja Barat mencuri telur naga){/i}"
+x "{i}(Dan sekarang aku membuat Purrin, [povname], dan seisi dunia dalam bahaya){/i}"
+
+hide x neutral_talk
+show p frown
+
+p "{i}(Aku juga takut, Ming){/i}"
+p "{i}(Tapi aku harus tetap kuat untukmu dan [povname]){/i}"
+p "{i}(Apa pun yang terjadi, aku harus melindungi kalian){/i}"
+p "{i}(Dan seisi dunia...){/i}"
+
+hide p frown
+
+pov "{i}(Kenyang banget bjir){/i}"
+
+scene bg anime grassland 9
+show x nervous_embarrassed_laugh
+
+x "Selamat pagi, Purrin."
+x "Selamat pagi, [povname]."
+x "Kalian sudah siap untuk melanjutkan perjalanan kita hari ini?"
+
+hide x nervous_embarrassed_laugh
+show p happy_talk
+
+p "Yuk!"
+
+hide p happy_talk
+
+"Tanpa mereka sadari, dari kejauhan ada sosok misterius yang mengawasi."
+
+show g
+
+g "Mereka benar-benar menuju ke barat."
+g "Aku akan mengirim surat pada Raja..."
+
+scene bg hutan
+show x neutral_talk
+
+x "Inikah hutan yang dimaksud Bukan Akung?"
+
+hide x neutral_talk
+show p neutral_talk
+
+p "Sepertinya iya. Tapi jangan takut, Ming"
+p "Bukan Akung bilang tidak ada monster di sini, jadi kita harusnya aman."
+
+hide p neutral_talk
+show x neutral_talk
+
+x "Tapi, bagaimana jika ada hantu?"
+
+hide x neutral_talk
+show p neutral_talk
+
+p "Percayalah aku bisa lebih menghantui dari hantu."
+
+hide p neutral_talk
+
+pov "Aku percaya."
+
+show p angry
+
+p "Heh!"
+
+hide p angry
+show x blush_happy_laugh
+
+x "Hahaha..."
+
+hide x blush_happy_laugh
+show p shy_smile
+
+p "{i}(Akhrinya Ming bisa tersenyum lagi...){/i}"
+
+scene bg anime grassland 18
+show x nervous_embarrassed_laugh
+
+x "Akhirnya kita keluar dari hutan menakutkan itu!"
+x "Lihat, seperti ada tenda di depan sana!"
+
+hide x nervous_embarrassed_laugh
+show p happy_talk
+
+p "Ayo kita lihat!"
+
+scene bg camp
+show p neutral_talk
+
+p "Ada yang tidak beres."
+p "Tidak ada tanda-tanda pertempuran, darah, apalagi mayat."
+p "Hanya ada tenda yang ditinggalkan begitu saja."
+p "Lihat, ada sekantung penuh uang. Ini juga bukan perampokan."
+
+hide p neutral_talk
+
+"Tidak ada yang bisa menjawab."
+"Semakin jauh mereka berjalan ke barat, semakin sering mereka melihat tenda-tenda seperti itu."
+"Tenda yang kosong, api unggun yang sudah padam."
+"Barang-barang tak bertuan."
+"Seolah ditinggalkan begitu saja."
+
+scene bg anime grassland 33
+
+"Sore hari tiba, Xiao Ming Ling tampak gelisah."
+
+show x neutral_talk
+
+x "Purrin, [povname], aku merasa seperti mendengar seseorang."
+
+hide x neutral_talk
+
+"Mereka berhenti sejenak, mencoba mendengar dengan seksama."
+
+pov "Aku juga mendengar sesuatu..."
+
+show p neutral_talk
+
+p "Seperti seseorang sedang bernyanyi."
+p "Ayo kita datangi suara itu!"
+
+hide p neutral_talk
+show x neutral_talk
+
+x "Bagaimana jika itu adalah jebakan?"
+
+hide x neutral_talk
+
+menu:
+    "Aku setuju dengan Purrin":
+        pass
+    "Xiao Ming Ling benar, ayo tetap berjalan lurus!":
+        "Mereka pun terus berjalan ke barat tanpa mendatangi suara itu."
+        "Mereka tidak pernah tahu apa yang mereka lewatkan."
+        "Namun, di dalam hati ketiganya sangat penasaran."
+        "Mereka pun mati penasaran."
+        "Game Over"
+        return
+
+"Mereka mengikuti suara itu dan menemukan seseorang di balik batu."
+
+show t surprised
+
+t "Ah, kalian menemukanku!"
+
+hide t surprised
+show p neutral_talk
+
+p "Tentu saja kami menemukanmu, nyanyianmu terdengar dari ujung sana!"
+
+hide p neutral_talk
+show t surprised
+
+t "Iya kah? Padahal aku sudah berusaha menyanyikan dengan pelan supaya tidak terdengar terlalu jauh."
+t "Apa yang kalian lakukan di tempat berbahaya seperti ini?"
+
+hide t surprised
+show p neutral_talk
+
+p "Bahaya apa yang mengancam tempat ini?"
+p "Dan kenapa kamu sendirian di tempat yang kau bilang berbahaya?"
+
+hide p neutral_talk
+show t neutral
+
+t "Namaku Tono, seorang penyanyi jalanan."
+t "Aku ingin sekali bernyanyi di Kerajaan Barat. Orang-orang di desa melarangku untuk pergi karena banyak pedagang yang tidak kembali dari sana."
+t "Tapi aku tidak peduli. Bagiku, misteri itu akan menjadi cerita yang bagus untuk lagu-laguku."
+
+hide t neutral
+show p neutral_talk
+
+p "Lalu?"
+
+hide p neutral_talk
+show t blush
+
+t "Lalu aku melihat tenda yang kosong itu, dan aku pun ketakutan."
+
+hide t blush
+
+menu:
+    "Hahaha cupu":
+        "Purrin, Xiao Ming Ling, dan Tono marah padamu karena kamu tidak sopan."
+        "Mereka memukulimu hingga mati."
+        "Game Over"
+        return
+    "Aku mengerti, ayo kita tetap bersama!":
+        pass
+
+show t blush
+
+t "Benarkah?"
+
+hide t blush
+show x blush_happy_laugh
+
+x "Kami juga ingin pergi ke barat. Aku merasa lebih aman jika lebih banyak orang yang pergi bersama."
+x "Boleh kan, Purrin?"
+
+hide x blush_happy_laugh
+show p frown_smile
+
+p "Tentu saja. Tono, ayo bergabung dengan kami!"
+
+hide p frown_smile
+show t happy
+
+t "Terima kasih, teman-teman baruku!"
+t "Aku tau kita belum saling kenal satu sama lain, tapi aku lebih takut ditinggalkan sendirian di tempat ini."
+t "Jadi, siapa kalian dan kenapa kalian pergi ke barat?"
+
+hide t happy
+
+"Purrin, Xiao Ming Ling, dan [povname] memperkenalkan diri kepada Tono."
+"Namun, mereka tidak menceritakan tentang misi mereka untuk merebut kembali telur naga."
+"Mereka hanya mengatakan bahwa mereka senang berpetualang."
+
+
+label continue_game_no_festival:
+    p "Kamu benar, kita harus fokus pada tujuan kita."
     
 
     return
